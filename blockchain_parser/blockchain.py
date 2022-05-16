@@ -87,6 +87,7 @@ class Blockchain(object):
         self.path = path
         self.blockIndexes = None
         self.indexPath = None
+        #print(self.path)
 
     def get_unordered_blocks(self):
         """Yields the blocks contained in the .blk files as is,
@@ -131,7 +132,7 @@ class Blockchain(object):
                 return False
 
             # parse the block
-            blkFile = os.path.join(self.path, "blk%05d.dat" % index.file)
+            blkFile = os.path.join(self.path.split('/')[0], "blk%05d.dat" % index.file)
             block = Block(get_block(blkFile, index.data_pos))
 
             if i == 0:
@@ -219,7 +220,8 @@ class Blockchain(object):
         for blkIdx in blockIndexes[start:end]:
             if blkIdx.file == -1 or blkIdx.data_pos == -1:
                 break
-            blkFile = os.path.join(self.path, "blk%05d.dat" % blkIdx.file)
+
+            blkFile = os.path.join(self.path.split('/')[0], "blk%05d.dat" % blkIdx.file)
             yield Block(get_block(blkFile, blkIdx.data_pos), blkIdx.height)
 
     def get_transaction(self, txid, db):
@@ -237,7 +239,7 @@ class Blockchain(object):
         raw_hex = db.get(tx_hash_fmtd)
 
         tx_idx = DBTransactionIndex(utils.format_hash(tx_hash_fmtd), raw_hex)
-        blk_file = os.path.join(self.path, "blk%05d.dat" % tx_idx.blockfile_no)
+        blk_file = os.path.join(self.path.split('/')[0], "blk%05d.dat" % tx_idx.blockfile_no)
         raw_hex = get_block(blk_file, tx_idx.file_offset)
 
         offset = tx_idx.block_offset
