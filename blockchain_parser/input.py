@@ -32,6 +32,10 @@ class Input(object):
     def add_witness(self, witness):
         self._witnesses.append(witness)
 
+
+    def get_hex(self):
+        return self.hex.hex()
+
     @classmethod
     def from_hex(cls, hex_):
         return cls(hex_)
