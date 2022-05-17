@@ -1,11 +1,10 @@
 from setuptools import setup, find_packages
-from blockchain_parser import __version__
+#from blockchain_parser import __version__
 
 
 setup(
     name='blockchain-parser',
-    version=__version__,
-    package_dir={'': 'src'},
+    version='0.1.5',
     packages=find_packages(),
     url='https://github.com/alecalve/python-bitcoin-blockchain-parser',
     author='Antoine Le Calvez',
