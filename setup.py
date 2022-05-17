@@ -5,7 +5,7 @@ from blockchain_parser import __version__
 setup(
     name='blockchain-parser',
     version=__version__,
-    package_dir={'': 'blockchain_parser'},
+    package_dir={'': './'},
     packages=find_packages(),
     url='https://github.com/alecalve/python-bitcoin-blockchain-parser',
     author='Antoine Le Calvez',
